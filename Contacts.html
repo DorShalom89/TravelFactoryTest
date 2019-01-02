@@ -1,0 +1,169 @@
+<html>
+  <body>
+    <div id="contacts" class="contacts">
+      <ul>
+        <div v-for="contact in ContactList" class="contact col-md-4">
+          <div class="row contact">
+            <div class="col-md-4 center">
+              <li v-html="contact.image"></li>
+              <li>{{ contact.jobTitle }}</li>
+            </div>
+            <div class="col-md-8">
+              <h3>{{ contact.name }}</h3>
+              <li>{{ contact.company }}</li>
+              <li>{{ contact.companyAddress }}</li>
+              <li>{{ contact.companyState }}</li>
+              <li>p: {{ contact.phone }}</li>
+              <li>{{ contact.coordinates}}</li>
+            </div>
+          </div>
+          <div class="edit row">
+              <img src="./assets/edit.png" v-on:click="editContact(contact.name)">
+              <img src="./assets/delete.png" v-on:click="deleteContact(contact.name)">
+          </div>
+        </div>
+        <div class="contact col-md-4">
+          <img
+            src="./assets/add.png"
+            class="addContact"
+            v-on:Click="openForm"
+          />
+        </div>
+      </ul>
+      <div class="form-popup" id="myForm">
+        <form class="form-container" onsubmit="event.preventDefault()">
+          <h1>Add Contact</h1>
+          <label><b>Name</b></label>
+          <input type="text" placeholder="Enter Name" name="Name" v-model="contactToAdd.name"  />
+          <label><b>JobTitle</b></label>
+          <input type="text" placeholder="Enter JobTitle" name="JobTitle" v-model="contactToAdd.jobTitle"  />
+          <label><b>Company</b></label>
+          <input type="text" placeholder="Enter Company" name="Company" v-model="contactToAdd.company"  />
+          <label><b>CompanyAddress</b></label>
+          <input type="text" placeholder="Enter CompanyAddress" name="CompanyAddress" v-model="contactToAdd.companyAddress"  />
+          <label><b>companyState</b></label>
+          <input type="text" placeholder="Enter companyState" name="companyState" v-model="contactToAdd.companyState"  />
+          <label><b>Phone</b></label>
+          <input type="text"  placeholder="Enter Phone" name="Phone" v-model="contactToAdd.phone"  />
+          <button class="btn" v-on:click="addContact">Add</button>
+          <button class="btn cancel" v-on:Click="closeForm">
+            Close
+          </button>
+        </form>
+      </div>
+      <div class="form-popup" id="myEditForm">
+            <form class="form-container" onsubmit="event.preventDefault()">
+              <h1>Edit Contact</h1>
+              <label><b>Name</b></label>
+              <input type="text" placeholder="Enter Name" name="Name" v-model="contactToAdd.name"  />
+              <label><b>JobTitle</b></label>
+              <input type="text" placeholder="Enter JobTitle" name="JobTitle" v-model="contactToAdd.jobTitle"  />
+              <label><b>Company</b></label>
+              <input type="text" placeholder="Enter Company" name="Company" v-model="contactToAdd.company"  />
+              <label><b>CompanyAddress</b></label>
+              <input type="text" placeholder="Enter CompanyAddress" name="CompanyAddress" v-model="contactToAdd.companyAddress"  />
+              <label><b>companyState</b></label>
+              <input type="text" placeholder="Enter companyState" name="companyState" v-model="contactToAdd.companyState"  />
+              <label><b>Phone</b></label>
+              <input type="text" placeholder="Enter Phone" name="Phone" v-model="contactToAdd.phone"  />
+              <button class="btn" v-on:click="edit">Done</button>
+            </form>
+          </div>
+    </div>
+  </body>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"
+    rel="stylesheet"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+  <script src="./js/contacts.js"></script>
+
+  <style type="text/css" media="screen">
+    li {
+      list-style-type: none;
+    }
+    .contact {
+      background-color: white;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .contacts {
+      text-align: center;
+      background-color: whitesmoke;
+    }
+    .addContact{
+        cursor: pointer;
+    }
+    .edit{
+        text-align: right;
+        cursor: pointer;
+    }
+    .center{
+        text-align: center;
+    }
+
+    /* The popup form - hidden by default */
+    .form-popup {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      right: 15px;
+      border: 3px solid #f1f1f1;
+      z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .form-container {
+      max-width: 300px;
+      padding: 10px;
+      background-color: white;
+    }
+
+    /* Full-width input fields */
+    .form-container input[type="text"],
+    .form-container input[type="password"] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* When the inputs get focus, do something */
+    .form-container input[type="text"]:focus,
+    .form-container input[type="password"]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+      background-color: #4caf50;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 10px;
+      opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+      background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover,
+    .open-button:hover {
+      opacity: 1;
+    }
+    img{
+        border-radius: 100%
+    }
+  </style>
+</html>
